@@ -25,20 +25,17 @@ const AddProductForm = () => {
       title,
       description,
       price,
+      // price: +price,
       image,
     };
-    if (
-      !title.trim() ||
-      !description.trim() ||
-      !price.trim() ||
-      !image.trim()
-    ) {
+    if (!title.trim() || !description.trim() || !price || !image.trim()) {
       alert("заполните поля!");
       return;
     }
     createProduct(newProduct);
     navigate("/products");
   }
+  // console.log(typeof price);
   return (
     <Container maxWidth="sm">
       <Breadcrumbs aria-label="breadcrumb">
@@ -54,13 +51,14 @@ const AddProductForm = () => {
         display={"flex"}
         flexDirection={"column"}
         padding={"30px"}
-        textAlign={"center"}>
+        textAlign={"center"}
+      >
         <Typography variant="h4" component="h2">
           Add new product
         </Typography>
         <TextField
           value={title}
-          onChange={e => setTitle(e.target.value)}
+          onChange={(e) => setTitle(e.target.value)}
           id="standard-basic"
           label="Title"
           variant="standard"
@@ -68,15 +66,16 @@ const AddProductForm = () => {
         />
         <TextField
           value={description}
-          onChange={e => setDescription(e.target.value)}
+          onChange={(e) => setDescription(e.target.value)}
           id="standard-basic"
           label="Description"
           variant="standard"
           style={{ margin: "10px" }}
         />
         <TextField
+          type="number"
           value={price}
-          onChange={e => setPrice(e.target.value)}
+          onChange={(e) => setPrice(+e.target.value)}
           id="standard-basic"
           label="Price"
           variant="standard"
@@ -84,7 +83,7 @@ const AddProductForm = () => {
         />
         <TextField
           value={image}
-          onChange={e => setImage(e.target.value)}
+          onChange={(e) => setImage(e.target.value)}
           id="standard-basic"
           label="Image"
           variant="standard"
@@ -94,7 +93,8 @@ const AddProductForm = () => {
           onClick={handleValues}
           style={{ margin: "10px" }}
           variant="contained"
-          color="success">
+          color="success"
+        >
           Add product
         </Button>
       </Box>
